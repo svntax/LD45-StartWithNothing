@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/GameplayControls.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Starfield.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/CrashingEnemySpawn.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -22,3 +23,6 @@ shape = SubResource( 1 )
 [node name="UIRoot" type="Control" parent="UILayer"]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="CrashingEnemySpawn" parent="." instance=ExtResource( 3 )]
+position = Vector2( 60, 60 )

@@ -3,7 +3,6 @@ extends Node2D
 var energyNodeScene = load("res://Scenes/EnergyNode.tscn")
 
 onready var mouseArea = $MouseArea
-onready var energyUI = $UILayer/UIRoot/EnergyLabel
 
 onready var selectedNode = null
 

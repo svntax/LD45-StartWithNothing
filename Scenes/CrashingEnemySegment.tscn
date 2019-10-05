@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/CrashingEnemySegment.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/crashing_ship.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12, 25 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 12, 10 )
+
+[node name="CrashingEnemySegment" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -12, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 13, 0 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="." to="." method="_on_CrashingEnemySegment_area_entered"]

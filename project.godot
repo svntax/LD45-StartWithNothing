@@ -34,6 +34,12 @@ deselect={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="DEFAULT"
+2d_physics/layer_2="ENEMY"
+2d_physics/layer_3="SPACE_NODE"
+
 [rendering]
 
 environment/default_clear_color=Color( 0.0941176, 0.0784314, 0.145098, 1 )
