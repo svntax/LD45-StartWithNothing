@@ -10,33 +10,33 @@ onready var energyCost = 0 #Cost to build
 onready var isSelected = false
 
 func connectNode(targetNode) -> void:
-	for element in adjacentNodes:
-		if element == targetNode:
-			#Already exists, so return
-			return
-	adjacentNodes.append(targetNode)
+    for element in adjacentNodes:
+        if element == targetNode:
+            #Already exists, so return
+            return
+    adjacentNodes.append(targetNode)
 
 func disconnectNode(targetNode) -> void:
-	var i = adjacentNodes.find(targetNode)
-	if i > -1:
-		adjacentNodes.remove(i)
+    var i = adjacentNodes.find(targetNode)
+    if i > -1:
+        adjacentNodes.remove(i)
 
 func deselect() -> void:
-	isSelected = false
+    isSelected = false
 
 func removeNode() -> void:
-	for node in adjacentNodes:
-		node.disconnectNode(self)
-	adjacentNodes.clear()
-	if nodeSystem.getSelectedNode() == self:
-		nodeSystem.deselectNode()
-	queue_free()
+    for node in adjacentNodes:
+        node.disconnectNode(self)
+    adjacentNodes.clear()
+    if nodeSystem.getSelectedNode() == self:
+        nodeSystem.deselectNode()
+    queue_free()
 
 func getAdjacentNodes() -> Array:
-	return adjacentNodes
+    return adjacentNodes
 
 func getNodesInRange() -> Array:
-	return nodeRange.get_overlapping_areas()
+    return nodeRange.get_overlapping_areas()
 
 func getEnergyCost() -> int:
-	return energyCost
+    return energyCost

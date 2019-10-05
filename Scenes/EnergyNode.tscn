@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/SpaceNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EnergyNode.gd" type="Script" id=2]
@@ -9,6 +9,12 @@ radius = 128.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 16.0
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.219608, 0.686275, 0.776471, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+corner_detail = 1
 
 [node name="EnergyNode" groups=[
 "EnergyNodes",
@@ -27,6 +33,17 @@ shape = SubResource( 2 )
 
 [node name="EnergyTimer" type="Timer" parent="." index="3"]
 autostart = true
+
+[node name="EnergyBar" type="ProgressBar" parent="." index="4"]
+margin_left = -16.4401
+margin_top = 5.72165
+margin_right = 15.5599
+margin_bottom = 10.7216
+mouse_filter = 2
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+step = 0.0
+percent_visible = false
 [connection signal="input_event" from="NodeRange" to="." method="_on_NodeRange_input_event"]
 [connection signal="input_event" from="MouseDetectRange" to="." method="_on_MouseDetectRange_input_event"]
 [connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]
