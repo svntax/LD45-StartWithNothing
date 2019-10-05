@@ -1,13 +1,13 @@
 extends "res://Scripts/SpaceNode.gd"
 
+onready var NODE_RADIUS = nodeRange.get_node("CollisionShape2D").shape.radius
+onready var MOUSE_RADIUS = $MouseDetectRange/CollisionShape2D.shape.radius
 onready var current_charge = 0.0;
 onready var MAXIMUM_CHARGE = 100;
 onready var SECONDS_TO_FULL_CHARGE = 8;
-onready var energyBar = $EnergyUI/EnergyBar
 
 func _ready():
     energyCost = 50 #TODO adjust later
-    energyBar.set_value(0)
 
 func _draw():
     for node in adjacentNodes:
@@ -19,6 +19,11 @@ func _draw():
 
 func _process(delta):
     update()
-    energyBar.set_value(energyBar.value + delta * energyBar.max_value / SECONDS_TO_FULL_CHARGE)
 
+func isPositionValid(pos):
+    var dist : int = global_position.distance_to(pos)
+    if MOUSE_RADIUS * 2 < dist and dist < NODE_RADIUS and !nodeSystem.isMouseOverlappingNode():
+        return true
+    else:
+        return false
         

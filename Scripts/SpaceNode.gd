@@ -11,6 +11,9 @@ onready var isSelected = false
 
 onready var groupId = -1;
 
+onready var NODE_RADIUS = nodeRange.get_node("CollisionShape2D").shape.radius
+onready var MOUSE_RADIUS = $MouseDetectRange/CollisionShape2D.shape.radius
+
 func connectNode(targetNode) -> void:
     for element in adjacentNodes:
         if element == targetNode:
@@ -79,3 +82,39 @@ func getNodesInRange() -> Array:
 
 func getEnergyCost() -> int:
     return energyCost
+    
+func _on_NodeRange_input_event(viewport, event, shape_idx):
+    if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+        if isSelected:
+            if isPositionValid(event.position):
+                print("valid point")
+                if(self.get_currently_available_energy() >= energyCost):
+                    self.spend_energy(energyCost);
+                    var newNode = nodeSystem.placeNode(event.position)
+                    nodeSystem.connectNodes(newNode, self)
+                    nodeSystem.deselectNode()
+                else:
+                    print("Not enough energy");
+            else:
+                print("invalid point")
+
+func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
+    if event is InputEventMouseButton and event.pressed :
+        if event.button_index == BUTTON_LEFT:
+            if not isSelected and not nodeSystem.hasSelectedNode():
+                isSelected = true
+                nodeSystem.selectNode(self)
+                print("mouse range click")
+            elif not isSelected and nodeSystem.hasSelectedNode():
+                nodeSystem.connectNodes(self, nodeSystem.getSelectedNode())
+                nodeSystem.deselectNode()
+        elif event.button_index == BUTTON_RIGHT and !nodeSystem.hasSelectedNode():
+            #TODO debug node removal, remove later?
+            self.removeNode()
+            
+func isPositionValid(pos):
+    var dist : int = global_position.distance_to(pos)
+    if MOUSE_RADIUS * 2 < dist and dist < NODE_RADIUS and !nodeSystem.isMouseOverlappingNode():
+        return true
+    else:
+        return false
