@@ -3,6 +3,7 @@ extends Position2D
 # Original source: https://github.com/mlokogrgel1/Worm_
 
 onready var body : Array = [] # List of segments that make up the worm's body
+onready var head_segment = null
 onready var rot : float = 0
 onready var heading : float = 0 # Rotation of head worm segment, in radians
 onready var vel : Vector2 = Vector2()
@@ -22,6 +23,8 @@ func init_segments() -> void:
     for i in range(segment_number):
         var segment = Segment.instance()
         add_child(segment)
+        if head_segment == null:
+            head_segment = segment
         segment.set_distance_between_joints(distance_between_joints)
         segment.j1 = j1
         j1=Vector2(j1.x - distance_between_joints, 0)

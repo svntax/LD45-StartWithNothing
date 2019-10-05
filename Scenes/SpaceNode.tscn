@@ -9,5 +9,7 @@ script = ExtResource( 1 )
 
 [node name="NodeRange" type="Area2D" parent="."]
 
-[node name="MouseDetectRange" type="Area2D" parent="."]
+[node name="MouseDetectRange" type="Area2D" parent="." groups=[
+"SpaceNodeHitboxes",
+]]
 collision_layer = 5

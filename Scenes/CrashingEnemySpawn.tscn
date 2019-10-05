@@ -7,3 +7,8 @@
 script = ExtResource( 1 )
 Segment = ExtResource( 2 )
 distance_between_joints = 16
+
+[node name="TargetCheckTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+[connection signal="timeout" from="TargetCheckTimer" to="." method="_on_TargetCheckTimer_timeout"]
