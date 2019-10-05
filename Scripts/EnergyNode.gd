@@ -30,15 +30,21 @@ func isPositionValid(pos):
         return true
     else:
         return false
+        
+
 
 func _on_NodeRange_input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
         if isSelected:
             if isPositionValid(event.position):
                 print("valid point")
-                var newNode = nodeSystem.placeNode(event.position)
-                nodeSystem.connectNodes(newNode, self)
-                nodeSystem.deselectNode()
+                if(self.get_currently_available_energy() >= energyCost):
+                    self.spend_energy(energyCost);
+                    var newNode = nodeSystem.placeNode(event.position)
+                    nodeSystem.connectNodes(newNode, self)
+                    nodeSystem.deselectNode()
+                else:
+                    print("Not enough energy");
             else:
                 print("invalid point")
 
@@ -55,6 +61,3 @@ func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
         elif event.button_index == BUTTON_RIGHT and !nodeSystem.hasSelectedNode():
             #TODO debug node removal, remove later?
             self.removeNode()
-
-#func _on_EnergyTimer_timeout():
-    #nodeSystem.addEnergy(generatedEnergyAmount)

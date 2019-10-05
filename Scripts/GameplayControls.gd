@@ -6,12 +6,20 @@ onready var mouseArea = $MouseArea
 onready var energyUI = $UILayer/UIRoot/EnergyLabel
 
 onready var selectedNode = null
-onready var energy = 100
+
+onready var allGroups = {};
+onready var alreadyTraversed = {};
 
 func _process(delta):
     mouseArea.global_position = get_viewport().get_mouse_position()
     if Input.is_action_just_pressed("deselect"):
         deselectNode()
+        
+func _ready():
+    var initialPos = Vector2(417, 270);
+    placeNode(initialPos);
+    tabulateGroups();
+    
 
 func selectNode(target) -> void:
     deselectNode()
@@ -36,6 +44,28 @@ func connectNodes(node1, node2) -> void:
 func disconnectNodes(node1, node2) -> void:
     node1.disconnectNode(node2)
     node2.disconnectNode(node1)
+    
+func tabulateGroups() -> void:
+    var groupIdCounter = 0;
+    alreadyTraversed = {};
+    allGroups = {};
+    var allSpaceNodes = get_tree().get_nodes_in_group("SpaceNodes");
+    for spaceNode in allSpaceNodes:
+        if alreadyTraversed.has(spaceNode.get_instance_id()):
+            continue;
+        groupIdCounter += 1;
+        allGroups[groupIdCounter] = [];
+        recursiveDFS(spaceNode, groupIdCounter);    
+        
+func recursiveDFS(currentNode, groupIdCounter) -> void:
+    if alreadyTraversed.has(currentNode.get_instance_id()):
+            return;
+    currentNode.groupId = groupIdCounter;
+    allGroups[groupIdCounter].push_back(currentNode.get_instance_id());
+    alreadyTraversed[currentNode.get_instance_id()] = 1;
+    for neighbor in currentNode.adjacentNodes:
+        recursiveDFS(neighbor, groupIdCounter);
+        
 
 #Returns the newly created node
 func placeNode(pos: Vector2):
@@ -43,7 +73,7 @@ func placeNode(pos: Vector2):
     var newNode = energyNodeScene.instance()
     add_child(newNode)
     newNode.global_position = pos
-    energy -= newNode.getEnergyCost()
+    # TODO use real energy cost from energy nodes energy -= newNode.getEnergyCost()
     return newNode
 
 func isMouseOverlappingNode() -> bool:
@@ -51,6 +81,3 @@ func isMouseOverlappingNode() -> bool:
         if mouseArea.global_position.distance_to(node.global_position) < node.MOUSE_RADIUS:
             return true
     return false
-
-func addEnergy(amount) -> void:
-    energy += amount
