@@ -1,7 +1,5 @@
 extends "res://Scripts/SpaceNode.gd"
 
-onready var NODE_RADIUS = nodeRange.get_node("CollisionShape2D").shape.radius
-onready var MOUSE_RADIUS = $MouseDetectRange/CollisionShape2D.shape.radius
 onready var current_charge = 0.0;
 onready var MAXIMUM_CHARGE = 100;
 onready var SECONDS_TO_FULL_CHARGE = 8;
