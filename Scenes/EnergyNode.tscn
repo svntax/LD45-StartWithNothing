@@ -10,13 +10,12 @@ radius = 128.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 16.0
 
-[node name="EnergyNode" index="0" groups=[
+[node name="EnergyNode" groups=[
 "EnergyNodes",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NodeRange" index="0"]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]

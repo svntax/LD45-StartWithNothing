@@ -16,3 +16,16 @@ position = Vector2( 417.526, 270.488 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
 shape = SubResource( 1 )
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="UIRoot" type="Control" parent="UILayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="EnergyLabel" type="Label" parent="UILayer/UIRoot"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 60.0
+margin_bottom = 34.0
+text = "Energy: 0"

@@ -3,6 +3,7 @@ extends Node2D
 var energyNodeScene = load("res://Scenes/EnergyNode.tscn")
 
 onready var mouseArea = $MouseArea
+onready var energyUI = $UILayer/UIRoot/EnergyLabel
 
 onready var selectedNode = null
 onready var energy = 100
@@ -11,6 +12,7 @@ func _process(delta):
 	mouseArea.global_position = get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("deselect"):
 		deselectNode()
+	energyUI.set_text("Energy: " + str(energy))
 
 func selectNode(target) -> void:
 	deselectNode()
@@ -38,9 +40,11 @@ func disconnectNodes(node1, node2) -> void:
 
 #Returns the newly created node
 func placeNode(pos: Vector2):
+	#TODO right now it always spawns an energy node, should be based on UI selection
 	var newNode = energyNodeScene.instance()
 	add_child(newNode)
 	newNode.global_position = pos
+	energy -= newNode.getEnergyCost()
 	return newNode
 
 func isMouseOverlappingNode() -> bool:
