@@ -36,4 +36,5 @@ deselect={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.0941176, 0.0784314, 0.145098, 1 )
 environment/default_environment="res://default_env.tres"

@@ -2,21 +2,27 @@
 
 [ext_resource path="res://Scenes/SpaceNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EnergyNode.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/energy_satellite.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 128.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 16.0
+radius = 22.0
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.219608, 0.686275, 0.776471, 1 )
+bg_color = Color( 0.172549, 0.909804, 0.960784, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.14902, 0.168627, 0.266667, 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.14902, 0.168627, 0.266667, 1 )
 corner_detail = 1
 
-[node name="EnergyNode" groups=[
+[node name="EnergyNode" index="0" groups=[
 "EnergyNodes",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -25,7 +31,7 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetectRange" index="0"]
@@ -34,15 +40,19 @@ shape = SubResource( 2 )
 [node name="EnergyTimer" type="Timer" parent="." index="3"]
 autostart = true
 
-[node name="EnergyBar" type="ProgressBar" parent="." index="4"]
-margin_left = -16.4401
-margin_top = 5.72165
-margin_right = 15.5599
-margin_bottom = 10.7216
+[node name="EnergyUI" type="Node2D" parent="." index="4"]
+z_index = 10
+
+[node name="EnergyBar" type="ProgressBar" parent="EnergyUI" index="0"]
+margin_left = -22.0
+margin_top = -44.0
+margin_right = 30.0
+margin_bottom = -36.0
 mouse_filter = 2
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
 step = 0.0
+value = 65.0
 percent_visible = false
 [connection signal="input_event" from="NodeRange" to="." method="_on_NodeRange_input_event"]
 [connection signal="input_event" from="MouseDetectRange" to="." method="_on_MouseDetectRange_input_event"]

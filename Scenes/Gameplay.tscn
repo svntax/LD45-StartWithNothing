@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/GameplayControls.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/EnergyNode.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Starfield.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/EnergyNode.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -9,7 +10,10 @@ radius = 4.0
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="EnergyNode" parent="." instance=ExtResource( 2 )]
+[node name="Starfield" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="EnergyNode" parent="." instance=ExtResource( 3 )]
 position = Vector2( 417.526, 270.488 )
 
 [node name="MouseArea" type="Area2D" parent="."]
