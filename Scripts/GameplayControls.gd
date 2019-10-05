@@ -7,21 +7,12 @@ onready var mouseArea = $MouseArea
 onready var selectedNode = null
 onready var energy = 100
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 func _process(delta):
 	mouseArea.global_position = get_viewport().get_mouse_position()
 	if Input.is_action_just_pressed("deselect"):
 		deselectNode()
 
 func selectNode(target) -> void:
-#	if selectedNode != null:
-#		if selectedNode.isPositionValid(target.global_position):
-#			connectNodes(selectedNode, target)
-#		deselectNode()
-#	else:
 	deselectNode()
 	selectedNode = target
 
