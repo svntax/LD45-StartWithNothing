@@ -41,7 +41,6 @@ func _ready():
     
 
 func selectNode(target) -> void:
-    deselectNode()
     selectedNode = target
 
 func deselectNode() -> void:

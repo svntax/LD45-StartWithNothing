@@ -14,6 +14,8 @@ onready var groupId = -1;
 onready var NODE_RADIUS = nodeRange.get_node("CollisionShape2D").shape.radius
 onready var MOUSE_RADIUS = $MouseDetectRange/CollisionShape2D.shape.radius
 
+
+
 onready var ENERGY_NODE_COST = 50;
 onready var GUN_NODE_COST = 75;
 
