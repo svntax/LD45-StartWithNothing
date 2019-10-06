@@ -36,6 +36,7 @@ func _input(event):
         if event.is_action("Shoot") and event.pressed:
             if isSelected:
                 if get_currently_available_energy() >= SHOOTING_COST:
+                    hideEnergyWarning()
                     spend_energy(SHOOTING_COST);
                     var projectile_test = player_projectile.instance();
                     var clickPos : Vector2 = get_global_mouse_position();
@@ -45,7 +46,9 @@ func _input(event):
                     projectile_test.direction = projectileMotion;
                     projectile_test.speed = PLAYER_PROJECTILE_SPEED;
                     projectile_test.damage = PLAYER_PROJECTILE_DAMAGE;
-                
+                else:
+                    # Not enough energy
+                    showEnergyWarning()
 
 func isPositionValid(pos):
     var dist : int = global_position.distance_to(pos)
@@ -54,3 +57,10 @@ func isPositionValid(pos):
     else:
         return false
         
+func showEnergyWarning():
+    SoundHandler.energyWarningSound.play()
+    $TextAnimation.play("energy_warning")
+
+func hideEnergyWarning():
+    $TextAnimation.stop()
+    $TextUI/Warning.hide()

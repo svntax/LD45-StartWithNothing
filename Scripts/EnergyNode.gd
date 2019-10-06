@@ -27,3 +27,11 @@ func _process(delta):
         spriteOutline.show()
     elif !isSelected and spriteOutline.visible:
         spriteOutline.hide()
+
+func showEnergyWarning():
+    SoundHandler.energyWarningSound.play()
+    $TextAnimation.play("energy_warning")
+
+func hideEnergyWarning():
+    $TextAnimation.stop()
+    $TextUI/Warning.hide()

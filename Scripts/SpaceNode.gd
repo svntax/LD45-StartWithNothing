@@ -98,6 +98,14 @@ func getNodesInRange() -> Array:
 
 func getEnergyCost() -> int:
     return energyCost
+
+# Override in subclasses
+func showEnergyWarning():
+    print("Not enough energy")
+
+# Override in subclasses
+func hideEnergyWarning():
+    pass
     
 func _on_NodeRange_input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_RIGHT:
@@ -110,16 +118,20 @@ func _on_NodeRange_input_event(viewport, event, shape_idx):
                         var newNode = nodeSystem.placeNode(event.position, nodeSystem.NodeType.ENERGY)
                         nodeSystem.connectNodes(newNode, self)
                         nodeSystem.deselectNode()
+                        hideEnergyWarning()
                     else:
-                        print("Not enough energy");
+                        # Not enough energy
+                        showEnergyWarning()
                 if nodeSystem.currentMode == nodeSystem.BUILD_GUN_MODE:
                     if(self.get_currently_available_energy() >= GUN_NODE_COST):
                         self.spend_energy(energyCost);
                         var newNode = nodeSystem.placeNode(event.position, nodeSystem.NodeType.GUN)
                         nodeSystem.connectNodes(newNode, self)
                         nodeSystem.deselectNode()
+                        hideEnergyWarning()
                     else:
-                        print("Not enough energy");
+                        # Not enough energy
+                        showEnergyWarning()
             else:
                 print("invalid point")
 
