@@ -25,19 +25,18 @@ func _process(delta):
     if Input.is_action_just_pressed("BuildEnergyNode"):
         currentMode = BUILD_ENERGY_MODE;
         nodeSelectUI.selectEnergyNode()
-        print("Build energy mode");
     if Input.is_action_just_pressed("BuildGunNode"):
         currentMode = BUILD_GUN_MODE;
         nodeSelectUI.selectGunNode()
-        print("Build gun mode");
     if Input.is_action_just_pressed("BuildLink"):
         currentMode = ADD_LINK_MODE;
         nodeSelectUI.selectLinkIcon()
-        print("Build link mode");
     if Input.is_action_just_pressed("NodeSelection"):
         if $MouseArea.get_overlapping_areas().size() == 0:
             print("No overlapping bodies");
             deselectNode();
+    if Input.is_action_just_pressed("deselect"):
+        deselectNode()
 
 
 func _ready():
@@ -50,7 +49,6 @@ func selectNode(target) -> void:
     selectedNode = target
 
 func deselectNode() -> void:
-    print("deselectNode()")
     if selectedNode != null:
         selectedNode.deselect()
     selectedNode = null

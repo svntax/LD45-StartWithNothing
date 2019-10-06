@@ -124,13 +124,13 @@ func _on_NodeRange_input_event(viewport, event, shape_idx):
 
 func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton and event.pressed:
-        if event.button_index == BUTTON_RIGHT:
+        if event.button_index == BUTTON_LEFT:
             if not isSelected:
                 isSelected = true
                 nodeSystem.deselectNode();
                 nodeSystem.selectNode(self)
                 print("mouse range click")
-        if event.button_index == BUTTON_LEFT:
+        if event.button_index == BUTTON_RIGHT:
             if not isSelected and nodeSystem.hasSelectedNode() and nodeSystem.currentMode == nodeSystem.ADD_LINK_MODE:
                 nodeSystem.connectNodes(self, nodeSystem.getSelectedNode())
                 nodeSystem.deselectNode()
