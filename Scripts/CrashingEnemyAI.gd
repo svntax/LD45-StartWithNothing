@@ -4,7 +4,11 @@ extends "res://Scripts/WormSpawner.gd"
 onready var turningWeight = 0.8
 
 onready var targetNode = null
-onready var fallbackTargetPos = Vector2(400 + rand_range(-300, 300), 300 + rand_range(-200, 200))
+onready var fallbackTargetPos = Vector2(400, 300)
+
+func _ready():
+    randomize()
+    fallbackTargetPos += Vector2(rand_range(-30, 300), rand_range(-200, 200))
 
 func _physics_process(delta):
     control(delta)
