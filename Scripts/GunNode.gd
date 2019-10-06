@@ -8,6 +8,7 @@ onready var player_projectile = load("res://Scenes/PlayerProjectile.tscn")
 
 onready var PLAYER_PROJECTILE_SPEED = 50;
 onready var PLAYER_PROJECTILE_DAMAGE = 10;
+onready var SHOOTING_COST = 40;
 
 
 func _ready():
@@ -29,14 +30,16 @@ func _input(event):
     if event is InputEventMouseButton:
         if event.button_index == BUTTON_RIGHT and event.pressed:
             if isSelected:
-                var projectile_test = player_projectile.instance();
-                var clickPos : Vector2 = get_global_mouse_position();
-                var projectileMotion : Vector2 = (clickPos - global_position).normalized();
-                get_parent().add_child(projectile_test);
-                projectile_test.global_position = global_position;
-                projectile_test.direction = projectileMotion;
-                projectile_test.speed = PLAYER_PROJECTILE_SPEED;
-                projectile_test.damage = PLAYER_PROJECTILE_DAMAGE;
+                if get_currently_available_energy() >= SHOOTING_COST:
+                    spend_energy(SHOOTING_COST);
+                    var projectile_test = player_projectile.instance();
+                    var clickPos : Vector2 = get_global_mouse_position();
+                    var projectileMotion : Vector2 = (clickPos - global_position).normalized();
+                    get_parent().add_child(projectile_test);
+                    projectile_test.global_position = global_position;
+                    projectile_test.direction = projectileMotion;
+                    projectile_test.speed = PLAYER_PROJECTILE_SPEED;
+                    projectile_test.damage = PLAYER_PROJECTILE_DAMAGE;
                 
 
 func isPositionValid(pos):
