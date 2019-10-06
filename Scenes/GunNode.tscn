@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 6 ), Vector2( 0, 0 ) ]
 }
 
-[node name="GunNode" index="0" groups=[
+[node name="GunNode" groups=[
 "GunNodes",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )

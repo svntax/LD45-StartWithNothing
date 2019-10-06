@@ -6,6 +6,7 @@ var energyNodeScene = load("res://Scenes/EnergyNode.tscn")
 var gunNodeScene = load("res://Scenes/GunNode.tscn")
 
 onready var mouseArea = $MouseArea
+onready var nodeSelectUI = $NodeTypeSelectionUI
 
 onready var selectedNode = null
 
@@ -25,12 +26,15 @@ func _process(delta):
         deselectNode()
     if Input.is_action_just_pressed("BuildEnergyNode"):
         currentMode = BUILD_ENERGY_MODE;
+        nodeSelectUI.selectEnergyNode()
         print("Build energy mode");
     if Input.is_action_just_pressed("BuildGunNode"):
         currentMode = BUILD_GUN_MODE;
+        nodeSelectUI.selectGunNode()
         print("Build gun mode");
     if Input.is_action_just_pressed("BuildLink"):
         currentMode = ADD_LINK_MODE;
+        nodeSelectUI.selectLinkIcon()
         print("Build link mode");
 
 
