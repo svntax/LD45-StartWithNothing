@@ -99,7 +99,7 @@ func getEnergyCost() -> int:
     return energyCost
     
 func _on_NodeRange_input_event(viewport, event, shape_idx):
-    if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+    if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_RIGHT:
         if isSelected:
             if isPositionValid(event.position):
                 print("valid point")

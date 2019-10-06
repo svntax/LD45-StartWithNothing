@@ -35,8 +35,6 @@ func _process(delta):
         if $MouseArea.get_overlapping_areas().size() == 0:
             print("No overlapping bodies");
             deselectNode();
-    if Input.is_action_just_pressed("deselect"):
-        deselectNode()
 
 
 func _ready():
