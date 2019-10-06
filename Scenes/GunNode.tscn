@@ -25,7 +25,7 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 34, 26 )
 
-[node name="GunNode" index="0" groups=[
+[node name="GunNode" groups=[
 "GunNodes",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )

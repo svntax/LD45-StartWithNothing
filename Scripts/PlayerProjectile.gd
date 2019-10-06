@@ -21,7 +21,6 @@ func _physics_process(delta):
     move_and_slide(direction * speed);
 
 func _on_EnemyDetect_area_entered(area):
-    print(area.name)
     if area.has_method("damage"):
         area.damage()
         self.queue_free()

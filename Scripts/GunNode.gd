@@ -26,7 +26,6 @@ func _draw():
 
 func _process(delta):
     update()
-    print($Sprite.position)
     if isSelected and not spriteOutline.visible:
         spriteOutline.show()
     elif !isSelected and spriteOutline.visible:
