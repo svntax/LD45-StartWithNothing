@@ -68,7 +68,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0.266667, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0.266667, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0.266667, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="EnergyNode" index="0" groups=[
+[node name="EnergyNode" groups=[
 "EnergyNodes",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
