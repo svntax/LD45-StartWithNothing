@@ -12,11 +12,28 @@ onready var selectedNode = null
 onready var allGroups = {};
 onready var alreadyTraversed = {};
 
+
+onready var BUILD_ENERGY_MODE = 1;
+onready var BUILD_GUN_MODE = 2;
+onready var ADD_LINK_MODE = 3;
+onready var currentMode = BUILD_ENERGY_MODE;
+
+
 func _process(delta):
     mouseArea.global_position = get_viewport().get_mouse_position()
     if Input.is_action_just_pressed("deselect"):
         deselectNode()
-        
+    if Input.is_action_just_pressed("BuildEnergyNode"):
+        currentMode = BUILD_ENERGY_MODE;
+        print("Build energy mode");
+    if Input.is_action_just_pressed("BuildGunNode"):
+        currentMode = BUILD_GUN_MODE;
+        print("Build gun mode");
+    if Input.is_action_just_pressed("BuildLink"):
+        currentMode = ADD_LINK_MODE;
+        print("Build link mode");
+
+
 func _ready():
     var initialPos = Vector2(417, 270);
     placeNode(initialPos, NodeType.ENERGY);

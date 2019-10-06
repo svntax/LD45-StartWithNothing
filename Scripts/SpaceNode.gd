@@ -14,6 +14,9 @@ onready var groupId = -1;
 onready var NODE_RADIUS = nodeRange.get_node("CollisionShape2D").shape.radius
 onready var MOUSE_RADIUS = $MouseDetectRange/CollisionShape2D.shape.radius
 
+onready var ENERGY_NODE_COST = 50;
+onready var GUN_NODE_COST = 75;
+
 func connectNode(targetNode) -> void:
     for element in adjacentNodes:
         if element == targetNode:
@@ -88,13 +91,22 @@ func _on_NodeRange_input_event(viewport, event, shape_idx):
         if isSelected:
             if isPositionValid(event.position):
                 print("valid point")
-                if(self.get_currently_available_energy() >= energyCost):
-                    self.spend_energy(energyCost);
-                    var newNode = nodeSystem.placeNode(event.position)
-                    nodeSystem.connectNodes(newNode, self)
-                    nodeSystem.deselectNode()
-                else:
-                    print("Not enough energy");
+                if nodeSystem.currentMode == nodeSystem.BUILD_ENERGY_MODE:
+                    if(self.get_currently_available_energy() >= ENERGY_NODE_COST):
+                        self.spend_energy(energyCost);
+                        var newNode = nodeSystem.placeNode(event.position, nodeSystem.NodeType.ENERGY)
+                        nodeSystem.connectNodes(newNode, self)
+                        nodeSystem.deselectNode()
+                    else:
+                        print("Not enough energy");
+                if nodeSystem.currentMode == nodeSystem.BUILD_GUN_MODE:
+                    if(self.get_currently_available_energy() >= GUN_NODE_COST):
+                        self.spend_energy(energyCost);
+                        var newNode = nodeSystem.placeNode(event.position, nodeSystem.NodeType.GUN)
+                        nodeSystem.connectNodes(newNode, self)
+                        nodeSystem.deselectNode()
+                    else:
+                        print("Not enough energy");
             else:
                 print("invalid point")
 
@@ -105,7 +117,7 @@ func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
                 isSelected = true
                 nodeSystem.selectNode(self)
                 print("mouse range click")
-            elif not isSelected and nodeSystem.hasSelectedNode():
+            elif not isSelected and nodeSystem.hasSelectedNode() and nodeSystem.currentMode == nodeSystem.ADD_LINK_MODE:
                 nodeSystem.connectNodes(self, nodeSystem.getSelectedNode())
                 nodeSystem.deselectNode()
         elif event.button_index == BUTTON_RIGHT and !nodeSystem.hasSelectedNode():
