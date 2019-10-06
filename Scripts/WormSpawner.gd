@@ -16,7 +16,7 @@ export (int) var segment_number = 1
 export (int) var distance_between_joints = 40
 
 func _ready():
-    init_segments()
+    pass
 
 func init_segments() -> void:
     # Initialize the segments, can customize each segment's properties if needed

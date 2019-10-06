@@ -62,6 +62,8 @@ func control(delta):
 
 func targetRandomNode():
     var spaceNodes = get_tree().get_nodes_in_group("SpaceNodes")
+    if spaceNodes.empty():
+        return
     var i = randi() % spaceNodes.size()
     fallbackTargetPos = spaceNodes[i].global_position + Vector2(rand_range(-200, 200), rand_range(-200, 200))
 
