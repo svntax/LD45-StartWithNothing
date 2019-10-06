@@ -6,7 +6,7 @@ onready var SECONDS_TO_FULL_CHARGE = 8;
 
 onready var player_projectile = load("res://Scenes/PlayerProjectile.tscn")
 
-onready var PLAYER_PROJECTILE_SPEED = 50;
+onready var PLAYER_PROJECTILE_SPEED = 100;
 onready var PLAYER_PROJECTILE_DAMAGE = 10;
 onready var SHOOTING_COST = 40;
 
