@@ -28,8 +28,8 @@ func _process(delta):
     
 func _input(event):
     if event is InputEventMouseButton:
-        if event.button_index == BUTTON_RIGHT and event.pressed:
-            if isSelected:
+        if event.button_index == BUTTON_LEFT and event.pressed:
+            if isSelected and nodeSystem.currentMode == nodeSystem.SHOOTING_MODE:
                 if get_currently_available_energy() >= SHOOTING_COST:
                     spend_energy(SHOOTING_COST);
                     var projectile_test = player_projectile.instance();

@@ -124,17 +124,19 @@ func _on_NodeRange_input_event(viewport, event, shape_idx):
 
 func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton and event.pressed:
-        if event.button_index == BUTTON_LEFT:
-            if not isSelected and not nodeSystem.hasSelectedNode():
+        if event.button_index == BUTTON_RIGHT:
+            if not isSelected:
                 isSelected = true
+                nodeSystem.deselectNode();
                 nodeSystem.selectNode(self)
                 print("mouse range click")
-            elif not isSelected and nodeSystem.hasSelectedNode() and nodeSystem.currentMode == nodeSystem.ADD_LINK_MODE:
+        if event.button_index == BUTTON_LEFT:
+            if not isSelected and nodeSystem.hasSelectedNode() and nodeSystem.currentMode == nodeSystem.ADD_LINK_MODE:
                 nodeSystem.connectNodes(self, nodeSystem.getSelectedNode())
                 nodeSystem.deselectNode()
-        elif event.button_index == BUTTON_RIGHT and !nodeSystem.hasSelectedNode():
+        #elif event.button_index == BUTTON_RIGHT and !nodeSystem.hasSelectedNode():
             #TODO debug node removal, remove later?
-            self.removeNode()
+            #self.removeNode()
             
 func isPositionValid(pos):
     var dist : int = global_position.distance_to(pos)
