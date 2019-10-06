@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/NodeTypeSelectionUI.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/icon_energy.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/icon_gun.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/icon_link.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/icon_highlight.png" type="Texture" id=5]
+
+[node name="NodeTypeSelectionUI" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="IconEnergy" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="IconGun" type="Sprite" parent="."]
+position = Vector2( 50, 0 )
+texture = ExtResource( 3 )
+
+[node name="IconConnect" type="Sprite" parent="."]
+position = Vector2( 100, 0 )
+texture = ExtResource( 4 )
+
+[node name="IconHighlight" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+
+[node name="EnergyKey" type="Label" parent="."]
+margin_left = -25.0
+margin_top = 14.0
+margin_right = 15.0
+margin_bottom = 28.0
+text = "Q"
+
+[node name="GunKey" type="Label" parent="."]
+margin_left = 25.0
+margin_top = 14.0
+margin_right = 65.0
+margin_bottom = 28.0
+text = "W"
+
+[node name="GunKey2" type="Label" parent="."]
+margin_left = 75.0
+margin_top = 14.0
+margin_right = 115.0
+margin_bottom = 28.0
+text = "E"
