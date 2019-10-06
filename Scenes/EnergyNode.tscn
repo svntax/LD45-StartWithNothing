@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/SpaceNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/EnergyNode.gd" type="Script" id=2]
@@ -15,6 +15,23 @@ border_color = Color( 0.14902, 0.168627, 0.266667, 1 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.14902, 0.168627, 0.266667, 1 )
 corner_detail = 1
+
+[sub_resource type="Animation" id=3]
+resource_name = "hover"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 6 ), Vector2( 0, 0 ) ]
+}
 
 [node name="EnergyNode" groups=[
 "EnergyNodes",
@@ -42,5 +59,9 @@ custom_styles/bg = SubResource( 2 )
 step = 0.0
 value = 65.0
 percent_visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+autoplay = "hover"
+anims/hover = SubResource( 3 )
 [connection signal="input_event" from="NodeRange" to="." method="_on_NodeRange_input_event"]
 [connection signal="input_event" from="MouseDetectRange" to="." method="_on_MouseDetectRange_input_event"]

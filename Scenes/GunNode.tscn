@@ -1,8 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/SpaceNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/GunNode.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/energy_satellite.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/gun_satellite.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "hover"
+length = 2.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 6 ), Vector2( 0, 0 ) ]
+}
 
 [node name="GunNode" index="0" groups=[
 "GunNodes",
@@ -15,5 +32,9 @@ texture = ExtResource( 3 )
 
 [node name="MouseDetectRange" parent="." index="2"]
 collision_mask = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+autoplay = "hover"
+anims/hover = SubResource( 1 )
 [connection signal="input_event" from="NodeRange" to="." method="_on_NodeRange_input_event"]
 [connection signal="input_event" from="MouseDetectRange" to="." method="_on_MouseDetectRange_input_event"]
