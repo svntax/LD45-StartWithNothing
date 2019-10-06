@@ -32,9 +32,17 @@ func _process(delta):
         currentMode = ADD_LINK_MODE;
         nodeSelectUI.selectLinkIcon()
     if Input.is_action_just_pressed("NodeSelection"):
-        if $MouseArea.get_overlapping_areas().size() == 0:
+        if mouseArea.get_overlapping_areas().size() == 0:
             print("No overlapping bodies");
             deselectNode();
+        else:
+            var shouldDeselect = true
+            # Ignore NodeRange areas that aren't from the currently selected node
+            for area in mouseArea.get_overlapping_areas():
+                if area.get_parent() == selectedNode:
+                    shouldDeselect = false
+            if shouldDeselect:
+                deselectNode()
 
 
 func _ready():
