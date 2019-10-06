@@ -12,12 +12,22 @@ onready var isSelected = false
 onready var groupId = -1;
 
 onready var NODE_RADIUS = nodeRange.get_node("CollisionShape2D").shape.radius
-onready var MOUSE_RADIUS = $MouseDetectRange/CollisionShape2D.shape.radius
+onready var HITBOX_RADIUS = $Hitbox/CollisionShape2D.shape.radius
 
 
 
 onready var ENERGY_NODE_COST = 50;
 onready var GUN_NODE_COST = 75;
+
+# https://docs.godotengine.org/en/3.1/tutorials/2d/custom_drawing_in_2d.html
+func draw_circle_arc(center, radius, angle_from, angle_to, color):
+    var nb_points = 32
+    var points_arc = PoolVector2Array()
+    for i in range(nb_points + 1):
+        var angle_point = deg2rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
+        points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
+    for index_point in range(nb_points):
+        draw_line(points_arc[index_point], points_arc[index_point + 1], color)
 
 func connectNode(targetNode) -> void:
     for element in adjacentNodes:
@@ -113,7 +123,7 @@ func _on_NodeRange_input_event(viewport, event, shape_idx):
                 print("invalid point")
 
 func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
-    if event is InputEventMouseButton and event.pressed :
+    if event is InputEventMouseButton and event.pressed:
         if event.button_index == BUTTON_LEFT:
             if not isSelected and not nodeSystem.hasSelectedNode():
                 isSelected = true
@@ -128,7 +138,7 @@ func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
             
 func isPositionValid(pos):
     var dist : int = global_position.distance_to(pos)
-    if MOUSE_RADIUS * 2 < dist and dist < NODE_RADIUS and !nodeSystem.isMouseOverlappingNode():
+    if HITBOX_RADIUS * 2 < dist and dist < NODE_RADIUS and !nodeSystem.isMouseOverlappingNode():
         return true
     else:
         return false

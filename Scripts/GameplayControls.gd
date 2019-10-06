@@ -104,6 +104,6 @@ func placeNode(pos: Vector2, type = NodeType.GUN):
 
 func isMouseOverlappingNode() -> bool:
     for node in get_tree().get_nodes_in_group("SpaceNodes"):
-        if mouseArea.global_position.distance_to(node.global_position) < node.MOUSE_RADIUS:
+        if mouseArea.global_position.distance_to(node.global_position) < node.HITBOX_RADIUS:
             return true
     return false

@@ -18,8 +18,9 @@ func _draw():
         #to_local() needed because _draw() is relative to this node's position
         draw_line(to_local($Sprite.global_position), to_local(node.get_node("Sprite").global_position), Color.red, 2)
     if isSelected:
-        draw_rect(Rect2(-16, -16, 32, 32), Color.green, false)
+        #draw_rect(Rect2(-16, -16, 32, 32), Color.green, false)
         #draw_circle(Vector2(0, 0), NODE_RADIUS, Color.green)
+        draw_circle_arc(Vector2(0, 0), NODE_RADIUS, 0, 360, Color("ead4aa"))
 
 func _process(delta):
     update()
@@ -40,7 +41,7 @@ func _input(event):
 
 func isPositionValid(pos):
     var dist : int = global_position.distance_to(pos)
-    if MOUSE_RADIUS * 2 < dist and dist < NODE_RADIUS and !nodeSystem.isMouseOverlappingNode():
+    if HITBOX_RADIUS * 2 < dist and dist < NODE_RADIUS and !nodeSystem.isMouseOverlappingNode():
         return true
     else:
         return false
