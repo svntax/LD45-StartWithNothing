@@ -1,6 +1,9 @@
 extends Node2D
 
+enum NodeType {ENERGY, GUN}
+
 var energyNodeScene = load("res://Scenes/EnergyNode.tscn")
+var gunNodeScene = load("res://Scenes/GunNode.tscn")
 
 onready var mouseArea = $MouseArea
 
@@ -9,14 +12,31 @@ onready var selectedNode = null
 onready var allGroups = {};
 onready var alreadyTraversed = {};
 
+
+onready var BUILD_ENERGY_MODE = 1;
+onready var BUILD_GUN_MODE = 2;
+onready var ADD_LINK_MODE = 3;
+onready var currentMode = BUILD_ENERGY_MODE;
+
+
 func _process(delta):
     mouseArea.global_position = get_viewport().get_mouse_position()
     if Input.is_action_just_pressed("deselect"):
         deselectNode()
-        
+    if Input.is_action_just_pressed("BuildEnergyNode"):
+        currentMode = BUILD_ENERGY_MODE;
+        print("Build energy mode");
+    if Input.is_action_just_pressed("BuildGunNode"):
+        currentMode = BUILD_GUN_MODE;
+        print("Build gun mode");
+    if Input.is_action_just_pressed("BuildLink"):
+        currentMode = ADD_LINK_MODE;
+        print("Build link mode");
+
+
 func _ready():
     var initialPos = Vector2(417, 270);
-    placeNode(initialPos);
+    placeNode(initialPos, NodeType.ENERGY);
     tabulateGroups();
     
 
@@ -67,9 +87,13 @@ func recursiveDFS(currentNode, groupIdCounter) -> void:
         
 
 #Returns the newly created node
-func placeNode(pos: Vector2):
+func placeNode(pos: Vector2, type = NodeType.GUN):
     #TODO right now it always spawns an energy node, should be based on UI selection
-    var newNode = energyNodeScene.instance()
+    var newNode = null
+    if type == NodeType.ENERGY:
+        newNode = energyNodeScene.instance()
+    elif type == NodeType.GUN:
+        newNode = gunNodeScene.instance()
     add_child(newNode)
     newNode.global_position = pos
     # TODO use real energy cost from energy nodes energy -= newNode.getEnergyCost()
