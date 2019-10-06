@@ -7,6 +7,8 @@ var gunNodeScene = load("res://Scenes/GunNode.tscn")
 
 onready var mouseArea = $MouseArea
 onready var nodeSelectUI = $UILayer/NodeTypeSelectionUI
+onready var uiAnimation = $UILayer/UIAnimation
+onready var waveText = $UILayer/TopUI/WaveLabel
 
 onready var selectedNode = null
 
@@ -49,7 +51,17 @@ func _ready():
     var initialPos = Vector2(417, 270);
     placeNode(initialPos, NodeType.ENERGY);
     tabulateGroups();
-    
+
+func showWaveCompleteUI():
+    waveText.set_text("Wave Complete")
+    uiAnimation.play("show_wave_text")
+
+func showNextWaveUI(wave):
+    waveText.set_text("Wave " + str(wave))
+    uiAnimation.play("show_wave_text")
+
+func _on_EnemySpawningSystem_wave_start(currentWave):
+    showNextWaveUI(currentWave)
 
 func selectNode(target) -> void:
     selectedNode = target
