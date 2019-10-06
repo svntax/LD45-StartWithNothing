@@ -19,6 +19,10 @@ config/name="LudumDare45"
 run/main_scene="res://Scenes/Gameplay.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SoundHandler="*res://Scenes/SoundHandler.tscn"
+
 [display]
 
 window/size/width=800

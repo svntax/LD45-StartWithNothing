@@ -2,6 +2,7 @@ extends "res://Scripts/WormSpawner.gd"
 
 # Affects how fast to turn towards the target node
 onready var turningWeight = 0.8
+onready var health = 2 # Health = number of segments * 2
 
 onready var targetNode = null
 onready var fallbackTargetPos = Vector2(400, 300)
@@ -19,9 +20,14 @@ func init_segments() -> void:
         segment.connect("segment_destroyed", self, "on_segment_destroyed")
     head_segment.connect("node_found", self, "on_node_found")
     head_segment.connect("node_left", self, "on_node_left")
+    health = segment_number
 
 func damage():
-    queue_free() #TODO hp damage
+    health -= 1
+    if health <= 0:
+        queue_free()
+    else:
+        SoundHandler.enemyHitSound.play()
 
 func on_segment_destroyed(segment):
     queue_free() #TODO fancy effects
@@ -29,13 +35,11 @@ func on_segment_destroyed(segment):
 func on_node_found(node):
     if targetNode == null:
         targetNode = node
-        print(targetNode)
     else:
         var currentDist = head_segment.global_position.distance_to(targetNode.global_position)
         var newDist = head_segment.global_position.distance_to(node.global_position)
         if newDist < currentDist:
             targetNode = node
-            print(targetNode)
 
 func on_node_left(node):
     if node == targetNode:

@@ -52,6 +52,7 @@ func removeNode() -> void:
     adjacentNodes.clear()
     if nodeSystem.getSelectedNode() == self:
         nodeSystem.deselectNode()
+    SoundHandler.explosionSound.play()
     queue_free()
     
 func get_connected_energy_nodes():
