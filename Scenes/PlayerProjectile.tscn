@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/PlayerProjectile.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/player_bullet.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 0.01
@@ -22,6 +23,5 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_EnemyDetect_area_entered"]
