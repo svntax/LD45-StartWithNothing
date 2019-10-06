@@ -16,6 +16,9 @@ func init_segments() -> void:
     head_segment.connect("node_found", self, "on_node_found")
     head_segment.connect("node_left", self, "on_node_left")
 
+func damage():
+    queue_free() #TODO hp damage
+
 func on_segment_destroyed(segment):
     queue_free() #TODO fancy effects
 
