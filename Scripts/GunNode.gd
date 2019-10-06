@@ -32,8 +32,8 @@ func _process(delta):
         spriteOutline.hide()
     
 func _input(event):
-    if event is InputEventMouseButton:
-        if event.button_index == BUTTON_RIGHT and event.pressed:
+    if event is InputEventKey:
+        if event.is_action("Shoot") and event.pressed:
             if isSelected:
                 if get_currently_available_energy() >= SHOOTING_COST:
                     spend_energy(SHOOTING_COST);

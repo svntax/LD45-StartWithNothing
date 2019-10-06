@@ -22,8 +22,6 @@ onready var currentMode = BUILD_ENERGY_MODE;
 
 func _process(delta):
     mouseArea.global_position = get_viewport().get_mouse_position()
-    if Input.is_action_just_pressed("deselect"):
-        deselectNode()
     if Input.is_action_just_pressed("BuildEnergyNode"):
         currentMode = BUILD_ENERGY_MODE;
         nodeSelectUI.selectEnergyNode()
@@ -36,6 +34,10 @@ func _process(delta):
         currentMode = ADD_LINK_MODE;
         nodeSelectUI.selectLinkIcon()
         print("Build link mode");
+    if Input.is_action_just_pressed("NodeSelection"):
+        if $MouseArea.get_overlapping_areas().size() == 0:
+            print("No overlapping bodies");
+            deselectNode();
 
 
 func _ready():
