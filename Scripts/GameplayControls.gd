@@ -6,7 +6,7 @@ var energyNodeScene = load("res://Scenes/EnergyNode.tscn")
 var gunNodeScene = load("res://Scenes/GunNode.tscn")
 
 onready var mouseArea = $MouseArea
-onready var nodeSelectUI = $NodeTypeSelectionUI
+onready var nodeSelectUI = $UILayer/NodeTypeSelectionUI
 
 onready var selectedNode = null
 

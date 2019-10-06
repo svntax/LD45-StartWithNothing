@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Scripts/GameplayControls.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Starfield.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/CrashingEnemySpawn.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/NodeTypeSelectionUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/NodeTypeSelectionUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/EnemySpawningSystem.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -25,9 +25,28 @@ shape = SubResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="CrashingEnemySpawn" parent="." instance=ExtResource( 3 )]
-position = Vector2( 60, 460 )
-
-[node name="NodeTypeSelectionUI" parent="." instance=ExtResource( 4 )]
+[node name="NodeTypeSelectionUI" parent="UILayer" instance=ExtResource( 3 )]
 position = Vector2( 300, 520 )
 scale = Vector2( 2, 2 )
+
+[node name="EnemySpawningSystem" parent="." instance=ExtResource( 4 )]
+
+[node name="Position2D" type="Position2D" parent="EnemySpawningSystem/SpawnPoints" index="0"]
+position = Vector2( 160, -30 )
+
+[node name="Position2D2" type="Position2D" parent="EnemySpawningSystem/SpawnPoints" index="1"]
+position = Vector2( 370, -30 )
+
+[node name="Position2D3" type="Position2D" parent="EnemySpawningSystem/SpawnPoints" index="2"]
+position = Vector2( 600, -30 )
+
+[node name="Position2D4" type="Position2D" parent="EnemySpawningSystem/SpawnPoints" index="3"]
+position = Vector2( 925.686, 187.124 )
+
+[node name="Position2D5" type="Position2D" parent="EnemySpawningSystem/SpawnPoints" index="4"]
+position = Vector2( 920.675, 477.736 )
+
+[node name="Position2D6" type="Position2D" parent="EnemySpawningSystem/SpawnPoints" index="5"]
+position = Vector2( -89.7853, 307.377 )
+
+[editable path="EnemySpawningSystem"]
