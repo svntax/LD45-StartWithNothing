@@ -10,6 +10,7 @@ onready var PLAYER_PROJECTILE_SPEED = 50;
 onready var PLAYER_PROJECTILE_DAMAGE = 10;
 onready var SHOOTING_COST = 40;
 
+onready var spriteOutline = $Sprite/SpriteOutline
 
 func _ready():
     energyCost = 50 #TODO adjust later
@@ -25,6 +26,11 @@ func _draw():
 
 func _process(delta):
     update()
+    print($Sprite.position)
+    if isSelected and not spriteOutline.visible:
+        spriteOutline.show()
+    elif !isSelected and spriteOutline.visible:
+        spriteOutline.hide()
     
 func _input(event):
     if event is InputEventMouseButton:

@@ -4,6 +4,7 @@ onready var current_charge = 0.0;
 onready var MAXIMUM_CHARGE = 100;
 onready var SECONDS_TO_FULL_CHARGE = 8;
 onready var energyBar = $EnergyUI/EnergyBar
+onready var spriteOutline = $Sprite/SpriteOutline
 
 func _ready():
     energyCost = 50 #TODO adjust later
@@ -21,5 +22,8 @@ func _draw():
 func _process(delta):
     update()
     energyBar.set_value(energyBar.value + delta * energyBar.max_value / SECONDS_TO_FULL_CHARGE)
-
-        
+    
+    if isSelected and not spriteOutline.visible:
+        spriteOutline.show()
+    elif !isSelected and spriteOutline.visible:
+        spriteOutline.hide()
