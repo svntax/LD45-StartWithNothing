@@ -1,5 +1,7 @@
 extends Node2D
 
+const LINE_COLOR = Color("ff0044")
+
 #References Gameplay.tscn with script that handles making connections
 onready var nodeSystem = get_parent()
 

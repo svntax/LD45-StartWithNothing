@@ -18,7 +18,7 @@ func _ready():
 func _draw():
     for node in adjacentNodes:
         #to_local() needed because _draw() is relative to this node's position
-        draw_line(to_local($Sprite.global_position), to_local(node.get_node("Sprite").global_position), Color.red, 2)
+        draw_line(to_local($Sprite.global_position), to_local(node.get_node("Sprite").global_position), LINE_COLOR, 2)
     if isSelected:
         #draw_rect(Rect2(-16, -16, 32, 32), Color.green, false)
         #draw_circle(Vector2(0, 0), NODE_RADIUS, Color.green)
