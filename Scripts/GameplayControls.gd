@@ -36,7 +36,7 @@ func _process(delta):
         nodeSelectUI.selectLinkIcon()
     if Input.is_action_just_pressed("NodeSelection"):
         if mouseArea.get_overlapping_areas().size() == 0:
-            print("No overlapping bodies");
+            #print("No overlapping bodies");
             deselectNode();
         else:
             var shouldDeselect = true
@@ -140,6 +140,5 @@ func _on_UIAnimation_animation_finished(anim):
         get_tree().paused = true
 
 func _on_ReturnButton_pressed():
-    print("pressed")
     get_tree().paused = false
     get_tree().change_scene("res://Scenes/Main.tscn")

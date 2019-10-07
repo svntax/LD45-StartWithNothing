@@ -76,7 +76,7 @@ func get_currently_available_energy():
     var total = 0.0;
     for energyNode in availableEnergyNodes:
         total+=energyNode.energyBar.value;
-    print("Determined total value to be ", total);
+    #print("Determined total value to be ", total);
     return total;
     
 func spend_energy(cost):
@@ -90,7 +90,7 @@ func spend_energy(cost):
         var spenders = 0;
         for energyNode in availableEnergyNodes:
             if energyNode.energyBar.value <= 0:
-                print("Value <= 0: ", energyNode.energyBar.value);
+                #print("Value <= 0: ", energyNode.energyBar.value);
                 continue;
             spenders += 1;
             if lowestNonZero == null or energyNode.energyBar.value < lowestNonZero.energyBar.value:
@@ -122,7 +122,7 @@ func _on_NodeRange_input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_RIGHT:
         if isSelected:
             if isPositionValid(event.position):
-                print("valid point")
+                #print("valid point")
                 if nodeSystem.currentMode == nodeSystem.BUILD_ENERGY_MODE:
                     if(self.get_currently_available_energy() >= ENERGY_NODE_COST):
                         self.spend_energy(energyCost);
@@ -144,7 +144,8 @@ func _on_NodeRange_input_event(viewport, event, shape_idx):
                         # Not enough energy
                         showEnergyWarning()
             else:
-                print("invalid point")
+                pass
+                #print("invalid point")
 
 func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton and event.pressed:
@@ -153,7 +154,7 @@ func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
                 isSelected = true
                 nodeSystem.deselectNode();
                 nodeSystem.selectNode(self)
-                print("mouse range click")
+                #print("mouse range click")
         if event.button_index == BUTTON_RIGHT:
             if not isSelected and nodeSystem.hasSelectedNode() and nodeSystem.currentMode == nodeSystem.ADD_LINK_MODE:
                 nodeSystem.connectNodes(self, nodeSystem.getSelectedNode())
