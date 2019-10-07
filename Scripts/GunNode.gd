@@ -62,7 +62,8 @@ func _input(event):
                         # Not enough energy
                         showEnergyWarning()
                 else:
-                    print("Gun is on cooldown");
+                    pass
+                    #print("Gun is on cooldown");
                     #TODO show UI warning
 
 func isPositionValid(pos):

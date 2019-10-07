@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/SoundHandler.gd" type="Script" id=1]
 [ext_resource path="res://Audio/explosion_01.wav" type="AudioStream" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Audio/not_enough_energy.wav" type="AudioStream" id=4]
 [ext_resource path="res://Audio/build_node.wav" type="AudioStream" id=5]
 [ext_resource path="res://Audio/gunshot.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio/title_music.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Audio/combat_music.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Audio/dead_music.ogg" type="AudioStream" id=9]
 
 [node name="SoundHandler" type="Node"]
 script = ExtResource( 1 )
@@ -22,8 +25,21 @@ volume_db = -24.0
 
 [node name="BuildNodeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -22.0
+volume_db = -18.0
 
 [node name="ShotSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -18.0
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -12.0
+
+[node name="CombatMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -10.0
+
+[node name="GameOverMusic" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 9 )
+volume_db = -8.0

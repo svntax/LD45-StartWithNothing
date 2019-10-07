@@ -22,7 +22,6 @@ onready var BUILD_GUN_MODE = 2;
 onready var ADD_LINK_MODE = 3;
 onready var currentMode = BUILD_ENERGY_MODE;
 
-
 func _process(delta):
     mouseArea.global_position = get_viewport().get_mouse_position()
     if Input.is_action_just_pressed("BuildEnergyNode"):
@@ -49,6 +48,7 @@ func _process(delta):
 
 
 func _ready():
+    SoundHandler.combatMusic.play()
     var initialPos = Vector2(417, 270);
     var firstNode = placeNode(initialPos, NodeType.ENERGY, false);
     firstNode.setEnergy(50)
@@ -131,15 +131,18 @@ func isMouseOverlappingNode() -> bool:
     return false
 
 func gameOver():
+    SoundHandler.combatMusic.stop()
     enemySpawningSystem.stopSpawningEnemies()
     uiAnimation.play("show_game_over")
 
 func _on_UIAnimation_animation_finished(anim):
     if anim == "show_game_over":
         uiAnimation.play("fade_out")
+        SoundHandler.gameOverMusic.play()
     elif anim == "fade_out":
         get_tree().paused = true
 
 func _on_ReturnButton_pressed():
     get_tree().paused = false
+    SoundHandler.gameOverMusic.stop()
     get_tree().change_scene("res://Scenes/Main.tscn")
