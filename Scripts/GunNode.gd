@@ -49,6 +49,7 @@ func _input(event):
                         var clickPos : Vector2 = get_global_mouse_position();
                         var projectileMotion : Vector2 = (clickPos - global_position).normalized();
                         get_parent().add_child(projectile_test);
+                        SoundHandler.shootSound.play()
                         projectile_test.global_position = global_position;
                         projectile_test.direction = projectileMotion;
                         projectile_test.speed = PLAYER_PROJECTILE_SPEED;

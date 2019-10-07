@@ -4,6 +4,8 @@ signal segment_destroyed
 signal node_found
 signal node_left
 
+onready var animationPlayer = $AnimationPlayer
+
 func _on_CrashingEnemySegment_area_entered(area):
     if area.is_in_group("SpaceNodeHitboxes"):
         area.get_parent().removeNode()
@@ -11,6 +13,7 @@ func _on_CrashingEnemySegment_area_entered(area):
         damage(1)
 
 func damage(amount = 1):
+    animationPlayer.play("hurt_flash")
     get_parent().damage(amount)
 
 func _on_DetectNodeArea_area_entered(area):

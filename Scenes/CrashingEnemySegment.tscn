@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/CrashingEnemySegment.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/crashing_ship.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/crashing_ship_hurt.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 25 )
@@ -11,6 +12,22 @@ extents = Vector2( 12, 10 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 196.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "hurt_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteHurt:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="CrashingEnemySegment" type="Area2D"]
 collision_layer = 2
@@ -22,6 +39,12 @@ rotation = 1.5708
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
+[node name="SpriteHurt" type="Sprite" parent="."]
+visible = false
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -12, 0 )
 shape = SubResource( 1 )
@@ -31,11 +54,15 @@ position = Vector2( 13, 0 )
 shape = SubResource( 2 )
 
 [node name="DetectNodeArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectNodeArea"]
 shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hurt_flash = SubResource( 4 )
 [connection signal="area_entered" from="." to="." method="_on_CrashingEnemySegment_area_entered"]
 [connection signal="area_entered" from="DetectNodeArea" to="." method="_on_DetectNodeArea_area_entered"]
 [connection signal="area_exited" from="DetectNodeArea" to="." method="_on_DetectNodeArea_area_exited"]
