@@ -52,6 +52,7 @@ text = "E"
 margin_top = -37.0
 margin_right = 103.0
 margin_bottom = -20.0
+mouse_filter = 2
 
 [node name="ActionLabel" type="Label" parent="ActionRoot"]
 margin_left = 14.0

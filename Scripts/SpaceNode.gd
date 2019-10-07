@@ -54,6 +54,7 @@ func removeNode() -> void:
     adjacentNodes.clear()
     if nodeSystem.getSelectedNode() == self:
         nodeSystem.deselectNode()
+    SoundHandler.explosionSound.pitch_scale = 1
     SoundHandler.explosionSound.play()
     
     var energyNodesLeft = get_tree().get_nodes_in_group("EnergyNodes").size()

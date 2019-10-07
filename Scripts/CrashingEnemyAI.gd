@@ -25,6 +25,8 @@ func init_segments() -> void:
 func damage(amount = 1):
     health -= amount
     if health <= 0:
+        SoundHandler.explosionSound.pitch_scale = 1.7
+        SoundHandler.explosionSound.play()
         queue_free()
     else:
         SoundHandler.enemyHitSound.play()
