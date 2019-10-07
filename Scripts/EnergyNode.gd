@@ -2,13 +2,16 @@ extends "res://Scripts/SpaceNode.gd"
 
 onready var current_charge = 0.0;
 onready var MAXIMUM_CHARGE = 100;
-onready var SECONDS_TO_FULL_CHARGE = 8;
+onready var SECONDS_TO_FULL_CHARGE = 10;
 onready var energyBar = $EnergyUI/EnergyBar
 onready var spriteOutline = $Sprite/SpriteOutline
 
 func _ready():
     energyCost = 50 #TODO adjust later
     energyBar.set_value(0)
+
+func setEnergy(amount):
+    energyBar.set_value(amount)
 
 func _draw():
     for node in adjacentNodes:

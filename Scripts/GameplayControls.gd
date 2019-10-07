@@ -50,7 +50,8 @@ func _process(delta):
 
 func _ready():
     var initialPos = Vector2(417, 270);
-    placeNode(initialPos, NodeType.ENERGY, false);
+    var firstNode = placeNode(initialPos, NodeType.ENERGY, false);
+    firstNode.setEnergy(50)
     tabulateGroups();
 
 func showWaveCompleteUI():

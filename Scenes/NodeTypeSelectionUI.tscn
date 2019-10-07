@@ -61,3 +61,9 @@ margin_bottom = 16.0
 custom_fonts/font = ExtResource( 6 )
 text = "Energy Node"
 align = 1
+
+[node name="MouseBlock" type="Control" parent="."]
+margin_left = -23.0
+margin_top = -16.0
+margin_right = 120.0
+margin_bottom = 26.0

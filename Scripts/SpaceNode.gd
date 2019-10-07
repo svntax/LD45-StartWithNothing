@@ -8,7 +8,7 @@ onready var nodeSystem = get_parent()
 onready var adjacentNodes : Array = []
 onready var nodeRange : Area2D = $NodeRange
 
-onready var energyCost = 0 #Cost to build
+onready var energyCost = 0 #UNUSED Cost to build
 onready var isSelected = false
 
 onready var groupId = -1;
@@ -126,7 +126,7 @@ func _on_NodeRange_input_event(viewport, event, shape_idx):
                 #print("valid point")
                 if nodeSystem.currentMode == nodeSystem.BUILD_ENERGY_MODE:
                     if(self.get_currently_available_energy() >= ENERGY_NODE_COST):
-                        self.spend_energy(energyCost);
+                        self.spend_energy(ENERGY_NODE_COST);
                         var newNode = nodeSystem.placeNode(event.position, nodeSystem.NodeType.ENERGY)
                         nodeSystem.connectNodes(newNode, self)
                         nodeSystem.deselectNode()

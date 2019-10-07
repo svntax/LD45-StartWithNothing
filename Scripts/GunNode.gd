@@ -2,7 +2,7 @@ extends "res://Scripts/SpaceNode.gd"
 
 onready var current_charge = 0.0;
 onready var MAXIMUM_CHARGE = 100;
-onready var SECONDS_TO_FULL_CHARGE = 8;
+#onready var SECONDS_TO_FULL_CHARGE = 8; #UNUSED
 
 onready var player_projectile = load("res://Scenes/PlayerProjectile.tscn")
 
