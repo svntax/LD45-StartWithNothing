@@ -12,12 +12,14 @@ onready var SHOOTING_COST = 40;
 
 onready var spriteOutline = $Sprite/SpriteOutline
 
-onready var COOLDOWN_TIME = 3.0;
+onready var COOLDOWN_TIME = 9.0;
 onready var cooldownBar = $CooldownUI/CooldownBar
+
+onready var SHOOTING_COOLDOWN_COST = cooldownBar.max_value / 3.0;
 
 func _ready():
     energyCost = 50 #TODO adjust later
-    cooldownBar.value = cooldownBar.max_value;
+    cooldownBar.value = SHOOTING_COOLDOWN_COST;
 
 
 func _draw():
@@ -41,9 +43,9 @@ func _input(event):
     if event is InputEventKey:
         if event.is_action("Shoot") and event.pressed:
             if isSelected:
-                if cooldownBar.value >= 100:
+                if cooldownBar.value >= SHOOTING_COOLDOWN_COST:
                     if get_currently_available_energy() >= SHOOTING_COST:
-                        cooldownBar.value = 0;
+                        cooldownBar.value -= SHOOTING_COOLDOWN_COST;
                         spend_energy(SHOOTING_COST);
                         var projectile_test = player_projectile.instance();
                         var clickPos : Vector2 = get_global_mouse_position();
