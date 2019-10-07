@@ -6,7 +6,7 @@ onready var SECONDS_TO_FULL_CHARGE = 8;
 
 onready var player_projectile = load("res://Scenes/PlayerProjectile.tscn")
 
-onready var PLAYER_PROJECTILE_SPEED = 100;
+onready var PLAYER_PROJECTILE_SPEED = 150;
 onready var PLAYER_PROJECTILE_DAMAGE = 10;
 onready var SHOOTING_COST = 40;
 
@@ -53,6 +53,8 @@ func _input(event):
                         projectile_test.direction = projectileMotion;
                         projectile_test.speed = PLAYER_PROJECTILE_SPEED;
                         projectile_test.damage = PLAYER_PROJECTILE_DAMAGE;
+                        projectile_test.lifespan = 10
+                        projectile_test.limited_lifespan = true
                     else:
                         # Not enough energy
                         showEnergyWarning()
