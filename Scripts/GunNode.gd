@@ -73,9 +73,11 @@ func isPositionValid(pos):
         return false
         
 func showEnergyWarning():
+    $TextUI.show()
     SoundHandler.energyWarningSound.play()
     $TextAnimation.play("energy_warning")
 
 func hideEnergyWarning():
     $TextAnimation.stop()
     $TextUI/Warning.hide()
+    $TextUI.hide()

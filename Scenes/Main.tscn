@@ -1,17 +1,69 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Starfield.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/title_logo.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/energy_satellite.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/gun_satellite.png" type="Texture" id=5]
-[ext_resource path="res://EquipmentPro.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Scenes/EnergyNode.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/GunNode.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/gun_satellite.png" type="Texture" id=6]
+[ext_resource path="res://EquipmentPro.ttf" type="DynamicFontData" id=7]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="Animation" id=1]
+resource_name = "hover_left"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../EnergyNode3/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 3 ), Vector2( 0, 4 ), Vector2( 0, 5 ), Vector2( 0, 4 ), Vector2( 0, 3 ), Vector2( 0, 2 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "gun_hover_left"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../GunNode/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 3 ), Vector2( 0, 4 ), Vector2( 0, 5 ), Vector2( 0, 4 ), Vector2( 0, 3 ), Vector2( 0, 2 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "hover_right"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../EnergyNode2/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 3 ), Vector2( 0, 4 ), Vector2( 0, 5 ), Vector2( 0, 4 ), Vector2( 0, 3 ), Vector2( 0, 2 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=3]
 size = 32
-font_data = ExtResource( 6 )
+font_data = ExtResource( 7 )
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.0980392, 0.235294, 0.243137, 1 )
 border_width_left = 4
 border_width_top = 4
@@ -19,7 +71,7 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color( 0.752941, 0.796078, 0.862745, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.0980392, 0.235294, 0.243137, 1 )
 border_width_left = 4
 border_width_top = 4
@@ -27,7 +79,7 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color( 0.752941, 0.796078, 0.862745, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.0980392, 0.235294, 0.243137, 1 )
 border_width_left = 4
 border_width_top = 4
@@ -35,9 +87,9 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color( 0.243137, 0.537255, 0.282353, 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=7]
 size = 48
-font_data = ExtResource( 6 )
+font_data = ExtResource( 7 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -54,30 +106,102 @@ scale = Vector2( 2, 2 )
 z_index = 20
 texture = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="EnergyNode3" parent="." instance=ExtResource( 4 )]
+editor/display_folded = true
 position = Vector2( 280, 300 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="EnergyNode3/NodeRange" index="0"]
+disabled = true
+
+[node name="CollisionShape2D" parent="EnergyNode3/Hitbox" index="0"]
+disabled = true
+
+[node name="EnergyUI" parent="EnergyNode3" index="3"]
+visible = false
+
+[node name="CollisionShape2D" parent="EnergyNode3/MouseDetectRange" index="0"]
+disabled = true
+
+[node name="HoverAnimation" type="AnimationPlayer" parent="EnergyNode3"]
+autoplay = "hover_left"
+anims/hover_left = SubResource( 1 )
+
+[node name="GunNode2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 120, 380 )
+
+[node name="CollisionShape2D" parent="GunNode2/NodeRange" index="0"]
+disabled = true
+
+[node name="CollisionShape2D" parent="GunNode2/Hitbox" index="0"]
+disabled = true
+
+[node name="CollisionShape2D" parent="GunNode2/MouseDetectRange" index="0"]
+disabled = true
+
+[node name="CooldownUI" parent="GunNode2" index="7"]
+visible = false
+
+[node name="HoverAnim" type="AnimationPlayer" parent="GunNode2"]
+autoplay = "gun_hover_left"
+anims/gun_hover_left = SubResource( 8 )
 
 [node name="Sprite4" type="Sprite" parent="."]
+visible = false
 position = Vector2( 120, 380 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
-[node name="Sprite2" type="Sprite" parent="."]
+[node name="EnergyNode2" parent="." instance=ExtResource( 4 )]
+editor/display_folded = true
 position = Vector2( 520, 300 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
 
-[node name="Sprite5" type="Sprite" parent="."]
+[node name="CollisionShape2D" parent="EnergyNode2/NodeRange" index="0"]
+disabled = true
+
+[node name="CollisionShape2D" parent="EnergyNode2/Hitbox" index="0"]
+disabled = true
+
+[node name="EnergyUI" parent="EnergyNode2" index="3"]
+visible = false
+
+[node name="CollisionShape2D" parent="EnergyNode2/MouseDetectRange" index="0"]
+disabled = true
+
+[node name="HoverAnimation" type="AnimationPlayer" parent="EnergyNode2"]
+autoplay = "hover_right"
+anims/hover_right = SubResource( 2 )
+
+[node name="EnergyNode" parent="." instance=ExtResource( 4 )]
+editor/display_folded = true
 position = Vector2( 400, 260 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
 
-[node name="Sprite3" type="Sprite" parent="."]
+[node name="CollisionShape2D" parent="EnergyNode/NodeRange" index="0"]
+disabled = true
+
+[node name="CollisionShape2D" parent="EnergyNode/Hitbox" index="0"]
+disabled = true
+
+[node name="EnergyUI" parent="EnergyNode" index="3"]
+visible = false
+
+[node name="CollisionShape2D" parent="EnergyNode/MouseDetectRange" index="0"]
+disabled = true
+
+[node name="GunNode" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
 position = Vector2( 680, 380 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" parent="GunNode/NodeRange" index="0"]
+disabled = true
+
+[node name="CollisionShape2D" parent="GunNode/Hitbox" index="0"]
+disabled = true
+
+[node name="CollisionShape2D" parent="GunNode/MouseDetectRange" index="0"]
+disabled = true
+
+[node name="CooldownUI" parent="GunNode" index="7"]
+visible = false
 
 [node name="ScoreContainer" type="CenterContainer" parent="."]
 margin_top = 527.0
@@ -90,7 +214,7 @@ margin_left = 220.0
 margin_top = 20.0
 margin_right = 580.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 text = "Highest wave reached: Wave 1"
 align = 1
 
@@ -106,10 +230,10 @@ margin_left = 284.0
 margin_right = 516.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 232, 56 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Start"
 
 [node name="QuitButton" type="Button" parent="Buttons"]
@@ -118,10 +242,20 @@ margin_top = 90.0
 margin_right = 516.0
 margin_bottom = 146.0
 rect_min_size = Vector2( 232, 56 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Quit"
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
+
+[editable path="EnergyNode3"]
+
+[editable path="GunNode2"]
+
+[editable path="EnergyNode2"]
+
+[editable path="EnergyNode"]
+
+[editable path="GunNode"]
