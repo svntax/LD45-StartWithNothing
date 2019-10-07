@@ -55,6 +55,11 @@ func removeNode() -> void:
     if nodeSystem.getSelectedNode() == self:
         nodeSystem.deselectNode()
     SoundHandler.explosionSound.play()
+    
+    var energyNodesLeft = get_tree().get_nodes_in_group("EnergyNodes").size()
+    
+    if self.is_in_group("EnergyNodes") and energyNodesLeft == 1:
+        nodeSystem.gameOver()
     queue_free()
     
 func get_connected_energy_nodes():

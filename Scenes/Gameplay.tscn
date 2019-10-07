@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/GameplayControls.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Starfield.gd" type="Script" id=2]
@@ -12,6 +12,112 @@ radius = 4.0
 [sub_resource type="DynamicFont" id=2]
 size = 48
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.0980392, 0.235294, 0.243137, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.752941, 0.796078, 0.862745, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.0980392, 0.235294, 0.243137, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.752941, 0.796078, 0.862745, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "fade_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ReturnButton:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ReturnButton:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ReturnButton:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show_game_over"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MiddleUI/GameOverLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "All energy nodes destroyed!", "Game Over" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MiddleUI/GameOverLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "show_wave_text"
@@ -61,7 +167,50 @@ align = 1
 position = Vector2( 300, 520 )
 scale = Vector2( 2, 2 )
 
+[node name="FadeRect" type="ColorRect" parent="UILayer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 800.0
+margin_bottom = 600.0
+mouse_filter = 2
+color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+
+[node name="ReturnButton" type="Button" parent="UILayer"]
+pause_mode = 2
+visible = false
+margin_left = 284.0
+margin_top = 362.0
+margin_right = 516.0
+margin_bottom = 418.0
+rect_min_size = Vector2( 232, 56 )
+mouse_filter = 2
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
+disabled = true
+text = "Main Menu"
+
+[node name="MiddleUI" type="CenterContainer" parent="UILayer"]
+margin_right = 800.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 800, 0 )
+mouse_filter = 2
+
+[node name="GameOverLabel" type="Label" parent="UILayer/MiddleUI"]
+visible = false
+margin_left = 152.0
+margin_top = 276.0
+margin_right = 647.0
+margin_bottom = 324.0
+custom_fonts/font = SubResource( 2 )
+text = "All energy nodes destroyed!"
+align = 1
+
 [node name="UIAnimation" type="AnimationPlayer" parent="UILayer"]
+anims/fade_out = SubResource( 5 )
+anims/show_game_over = SubResource( 4 )
 anims/show_wave_text = SubResource( 3 )
 
 [node name="EnemySpawningSystem" parent="." instance=ExtResource( 5 )]
@@ -131,6 +280,8 @@ position = Vector2( 1020.21, 327.377 )
 
 [node name="Position2D22" type="Position2D" parent="EnemySpawningSystem/SpawnPoints" index="21"]
 position = Vector2( 1060.21, 47.377 )
+[connection signal="pressed" from="UILayer/ReturnButton" to="." method="_on_ReturnButton_pressed"]
+[connection signal="animation_finished" from="UILayer/UIAnimation" to="." method="_on_UIAnimation_animation_finished"]
 [connection signal="wave_start" from="EnemySpawningSystem" to="." method="_on_EnemySpawningSystem_wave_start"]
 
 [editable path="EnemySpawningSystem"]

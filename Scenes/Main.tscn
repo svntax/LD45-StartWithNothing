@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Starfield.gd" type="Script" id=2]
@@ -32,6 +32,10 @@ border_color = Color( 0.243137, 0.537255, 0.282353, 1 )
 size = 48
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 3 )
+
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
@@ -42,9 +46,9 @@ __meta__ = {
 script = ExtResource( 2 )
 
 [node name="Buttons" type="Control" parent="."]
-margin_top = 410.0
+margin_top = 380.0
 margin_right = 800.0
-margin_bottom = 559.0
+margin_bottom = 529.0
 rect_min_size = Vector2( 800, 0 )
 mouse_filter = 2
 
@@ -70,5 +74,20 @@ custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "Quit"
+
+[node name="ScoreContainer" type="CenterContainer" parent="."]
+margin_top = 527.0
+margin_right = 800.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 800, 0 )
+
+[node name="HighScore" type="Label" parent="ScoreContainer"]
+margin_left = 220.0
+margin_top = 20.0
+margin_right = 580.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 5 )
+text = "Highest wave reached: Wave 1"
+align = 1
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]

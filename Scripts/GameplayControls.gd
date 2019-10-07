@@ -9,6 +9,7 @@ onready var mouseArea = $MouseArea
 onready var nodeSelectUI = $UILayer/NodeTypeSelectionUI
 onready var uiAnimation = $UILayer/UIAnimation
 onready var waveText = $UILayer/TopUI/WaveLabel
+onready var enemySpawningSystem = $EnemySpawningSystem
 
 onready var selectedNode = null
 
@@ -49,7 +50,7 @@ func _process(delta):
 
 func _ready():
     var initialPos = Vector2(417, 270);
-    placeNode(initialPos, NodeType.ENERGY);
+    placeNode(initialPos, NodeType.ENERGY, false);
     tabulateGroups();
 
 func showWaveCompleteUI():
@@ -107,9 +108,8 @@ func recursiveDFS(currentNode, groupIdCounter) -> void:
         recursiveDFS(neighbor, groupIdCounter);
         
 
-#Returns the newly created node
-func placeNode(pos: Vector2, type = NodeType.GUN):
-    #TODO right now it always spawns an energy node, should be based on UI selection
+# Returns the newly created node
+func placeNode(pos: Vector2, type = NodeType.GUN, playSound = true):
     var newNode = null
     if type == NodeType.ENERGY:
         newNode = energyNodeScene.instance()
@@ -117,6 +117,8 @@ func placeNode(pos: Vector2, type = NodeType.GUN):
         newNode = gunNodeScene.instance()
     add_child(newNode)
     newNode.global_position = pos
+    if playSound:
+        SoundHandler.buildSound.play()
     # TODO use real energy cost from energy nodes energy -= newNode.getEnergyCost()
     return newNode
 
@@ -125,3 +127,18 @@ func isMouseOverlappingNode() -> bool:
         if mouseArea.global_position.distance_to(node.global_position) < node.HITBOX_RADIUS:
             return true
     return false
+
+func gameOver():
+    enemySpawningSystem.stopSpawningEnemies()
+    uiAnimation.play("show_game_over")
+
+func _on_UIAnimation_animation_finished(anim):
+    if anim == "show_game_over":
+        uiAnimation.play("fade_out")
+    elif anim == "fade_out":
+        get_tree().paused = true
+
+func _on_ReturnButton_pressed():
+    print("pressed")
+    get_tree().paused = false
+    get_tree().change_scene("res://Scenes/Main.tscn")

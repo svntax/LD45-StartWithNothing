@@ -16,12 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="LudumDare45"
-run/main_scene="res://Scenes/Gameplay.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 SoundHandler="*res://Scenes/SoundHandler.tscn"
+Globals="*res://Scripts/Globals.gd"
 
 [display]
 

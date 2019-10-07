@@ -11,13 +11,19 @@ onready var spawnPoints = $SpawnPoints
 onready var currentWave = 1
 onready var spawnCount = 0
 
+onready var isActive = true
+
 func startSpawningEnemies():
-    emit_signal("wave_start", currentWave)
-    spawnTimer.start()
-    spawnCount = 0
-    currentWave += 1
+    if isActive:
+        emit_signal("wave_start", currentWave)
+        spawnTimer.start()
+        spawnCount = 0
+        currentWave += 1
 
 func _on_SpawnTimer_timeout():
+    if not isActive:
+        return
+
     var enemy = crashingEnemyScene.instance()
     add_child(enemy)
     
@@ -36,4 +42,12 @@ func _on_SpawnTimer_timeout():
         $InitialDelayTimer.start()
 
 func _on_InitialDelayTimer_timeout():
-    startSpawningEnemies()
+    if isActive:
+        startSpawningEnemies()
+
+func stopSpawningEnemies():
+    isActive = false
+    spawnTimer.stop()
+    $InitialDelayTimer.stop()
+    # -1 because when current wave starts, currentWave var is immediately incremented
+    Globals.updateHighScore(currentWave - 1)
