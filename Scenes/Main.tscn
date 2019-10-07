@@ -1,8 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Starfield.gd" type="Script" id=2]
-[ext_resource path="res://EquipmentPro.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Sprites/title_logo.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/energy_satellite.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/gun_satellite.png" type="Texture" id=5]
+[ext_resource path="res://EquipmentPro.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0980392, 0.235294, 0.243137, 1 )
@@ -30,11 +37,7 @@ border_color = Color( 0.243137, 0.537255, 0.282353, 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 48
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 32
-font_data = ExtResource( 3 )
+font_data = ExtResource( 6 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,6 +47,52 @@ __meta__ = {
 
 [node name="Starfield" type="Node2D" parent="."]
 script = ExtResource( 2 )
+
+[node name="TitleLogo" type="Sprite" parent="."]
+position = Vector2( 400, 120 )
+scale = Vector2( 2, 2 )
+z_index = 20
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 280, 300 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 120, 380 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 520, 300 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 400, 260 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 680, 380 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+
+[node name="ScoreContainer" type="CenterContainer" parent="."]
+margin_top = 527.0
+margin_right = 800.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 800, 0 )
+
+[node name="HighScore" type="Label" parent="ScoreContainer"]
+margin_left = 220.0
+margin_top = 20.0
+margin_right = 580.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 5 )
+text = "Highest wave reached: Wave 1"
+align = 1
 
 [node name="Buttons" type="Control" parent="."]
 margin_top = 380.0
@@ -74,20 +123,5 @@ custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 text = "Quit"
-
-[node name="ScoreContainer" type="CenterContainer" parent="."]
-margin_top = 527.0
-margin_right = 800.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 800, 0 )
-
-[node name="HighScore" type="Label" parent="ScoreContainer"]
-margin_left = 220.0
-margin_top = 20.0
-margin_right = 580.0
-margin_bottom = 52.0
-custom_fonts/font = SubResource( 5 )
-text = "Highest wave reached: Wave 1"
-align = 1
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]

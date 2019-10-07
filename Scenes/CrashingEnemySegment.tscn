@@ -15,7 +15,8 @@ radius = 196.0
 
 [sub_resource type="Animation" id=4]
 resource_name = "hurt_flash"
-length = 0.1
+length = 0.15
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteHurt:visible")
 tracks/0/interp = 1
@@ -23,7 +24,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.15 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]

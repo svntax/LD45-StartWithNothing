@@ -30,7 +30,7 @@ func _on_SpawnTimer_timeout():
     #Pick random spawn point
     var i = randi() % spawnPoints.get_child_count()
     enemy.global_position = spawnPoints.get_child(i).global_position
-    enemy.set_number_of_segments(floor(rand_range(currentWave-1, currentWave + 4)))
+    enemy.set_number_of_segments(floor(rand_range(currentWave-1, currentWave + 3)))
     enemy.init_segments()
     
     spawnTimer.wait_time = floor(rand_range(3, 6))

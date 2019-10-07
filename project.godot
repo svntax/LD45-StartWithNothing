@@ -15,9 +15,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="LudumDare45"
+config/name="Solar Grid"
 run/main_scene="res://Scenes/Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://Sprites/energy_satellite.png"
 
 [autoload]
 
