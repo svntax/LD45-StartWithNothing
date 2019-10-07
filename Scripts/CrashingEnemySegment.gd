@@ -10,7 +10,7 @@ func _on_CrashingEnemySegment_area_entered(area):
     if area.is_in_group("SpaceNodeHitboxes"):
         area.get_parent().removeNode()
         #emit_signal("segment_destroyed", self)
-        damage(1)
+        damage(2)
 
 func damage(amount = 1):
     animationPlayer.play("hurt_flash")
