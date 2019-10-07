@@ -76,7 +76,11 @@ func get_currently_available_energy():
     
 func spend_energy(cost):
     var availableEnergyNodes = get_connected_energy_nodes();
+    var remainingIterations = 100;
     while(cost > 0):
+        remainingIterations -= 1;
+        if remainingIterations <= 0:
+            break;
         var lowestNonZero = null;
         var spenders = 0;
         for energyNode in availableEnergyNodes:
