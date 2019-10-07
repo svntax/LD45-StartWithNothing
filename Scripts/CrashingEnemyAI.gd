@@ -2,7 +2,7 @@ extends "res://Scripts/WormSpawner.gd"
 
 # Affects how fast to turn towards the target node
 onready var turningWeight = 0.8
-onready var health = 2 # Health = number of segments * 2
+onready var health = 1 # Health = number of segments
 
 onready var targetNode = null
 onready var fallbackTargetPos = Vector2(400, 300)
@@ -22,8 +22,8 @@ func init_segments() -> void:
     head_segment.connect("node_left", self, "on_node_left")
     health = segment_number
 
-func damage():
-    health -= 1
+func damage(amount = 1):
+    health -= amount
     if health <= 0:
         queue_free()
     else:
