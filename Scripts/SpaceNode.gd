@@ -158,6 +158,8 @@ func _on_MouseDetectRange_input_event(viewport, event, shape_idx):
             if not isSelected and nodeSystem.hasSelectedNode() and nodeSystem.currentMode == nodeSystem.ADD_LINK_MODE:
                 nodeSystem.connectNodes(self, nodeSystem.getSelectedNode())
                 nodeSystem.deselectNode()
+                SoundHandler.buildSound.pitch_scale = 1.2
+                SoundHandler.buildSound.play()
         #elif event.button_index == BUTTON_RIGHT and !nodeSystem.hasSelectedNode():
             #TODO debug node removal, remove later?
             #self.removeNode()

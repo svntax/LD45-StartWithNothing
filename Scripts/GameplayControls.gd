@@ -118,6 +118,7 @@ func placeNode(pos: Vector2, type = NodeType.GUN, playSound = true):
     add_child(newNode)
     newNode.global_position = pos
     if playSound:
+        SoundHandler.buildSound.pitch_scale = 1
         SoundHandler.buildSound.play()
     # TODO use real energy cost from energy nodes energy -= newNode.getEnergyCost()
     return newNode
