@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/SpaceNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/GunNode.gd" type="Script" id=2]
@@ -54,7 +54,13 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0.266667, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0.266667, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0.266667, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="GunNode" groups=[
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.752941, 0.796078, 0.862745, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.14902, 0.168627, 0.266667, 1 )
+
+[node name="GunNode" index="0" groups=[
 "GunNodes",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -90,4 +96,15 @@ align = 1
 
 [node name="TextAnimation" type="AnimationPlayer" parent="." index="6"]
 anims/energy_warning = SubResource( 3 )
+
+[node name="CooldownUI" type="Node2D" parent="." index="7"]
+
+[node name="CooldownBar" type="ProgressBar" parent="CooldownUI" index="0"]
+margin_left = -26.5504
+margin_top = -40.0184
+margin_right = 25.4496
+margin_bottom = -32.0184
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+percent_visible = false
 [connection signal="input_event" from="NodeRange" to="." method="_on_NodeRange_input_event"]
